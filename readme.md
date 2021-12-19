@@ -23,7 +23,12 @@ Output file timestamps are touched to the timestamp of the first chapter file of
 The track order of the metadata is preserved.
 The SOS metadata is not preserved.
 
-This blog post was helpful: [https://coderunner.io/how-to-compress-gopro-movies-and-keep-metadata/]
+This blog post was helpful: [how-to-compress-gopro-movies-and-keep-metadata](https://coderunner.io/how-to-compress-gopro-movies-and-keep-metadata/)
+
+This showed how to extract the metadata itself to a file: [gopro-utils](https://github.com/stilldavid/gopro-utils)
+This has been included so that the metadata is backed up to the bin folder.
+
+## Samples
 
 sample original `ffmpeg -i`
 

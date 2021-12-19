@@ -52,9 +52,30 @@ if (!file_exists($episodeListsDir)) {
 foreach ($files as $episode => $chapters) {
     $file = fopen($episodeListsDir."$episode.txt", "w");
     foreach ($chapters as $chapter => $fileName) {
+        // replace MP4 with bin
+        $binFileName = str_replace('.MP4', '.bin', $fileName);
+        // place the bin file in the bin directory
+        $binDir = $argv[4] ?? $dir.'bin/';
+        // make sure the directory has a trailing slash
+        if (substr($binDir, -1) != '/') {
+            $binDir .= '/';
+        }
+        // make the directory if it doesn't exist
+        if (!file_exists($binDir)) {
+            mkdir($binDir);
+        }
+        // make the bin file name
+        $binFile = $binDir.$binFileName;
+        // replace spaces in bin file name with 2 backslashes
+        $binFile = str_replace(' ', '\\ ', $binFile);
+        // command to extract the metadata per chapter
+        $metadataCmd = "ffmpeg -y -i ".$episodesDir.$fileName." -codec copy -map 0:d\? -map 0:d\? -tag:d:1 'gpmd' -tag:d:2 'gpmd' -f rawvideo ".$binFile;
         // write the file encoded in UTF-8
         $fileContents = "file '../".$fileName."'\n";
         fwrite($file, $fileContents);
+        // run the command to extract the metadata
+        echo $metadataCmd."\n";
+        exec($metadataCmd);
     }
     fclose($file);
 }
