@@ -82,8 +82,8 @@ foreach ($files as $episode => $chapters) {
     $chapterList = str_replace(' ', '\\ ', $chapterList);
     $cmd = "ffmpeg -y -f concat -safe 0 -i $chapterList -copy_unknown -map_metadata 0 \\
         -c copy \\
-        -map 0:v -map 0:a \\
-        -map 0:d \\
+        -map 0:v -map 0:a\? \\
+        -map 0:m:handler_name:' GoPro TCD'\? \\
         -map 0:d\? \\
         -map 0:m:handler_name:' GoPro SOS'\? \\
         -tag:d:1 'gpmd' -tag:d:2 'gpmd' \\

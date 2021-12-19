@@ -10,11 +10,11 @@ All arguments are optional
 
 Only files matching GXCCEEEE.MP4, where C or E is a chapter or episode number, are processed.
 
-Files with consecutive chapter numbers and matching episode numbers are merged. (GX01####, GX02####, GX03####, etc.)
+Files with consecutive chapter numbers and matching episode numbers are merged. (GX01EEEE, GX02EEEE, GX03EEEE, etc.)
 
 Output files are named EEEE.MP4.
 
-Output files are placed in the output directory.
+Output files are placed in the output directory. (default is input directory + /output, can be changed by passing the output directory as the second parameter)
 
 Output file timestamps are touched to the timestamp of the first chapter file of the apisode.
 
