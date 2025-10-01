@@ -101,18 +101,18 @@ foreach ($files as $episode => $chapters) {
     $chapterList = $episodeListsDir."$episode.txt";
     $chapterListRaw = $chapterList;
     $chapterList = str_replace(' ', '\\ ', $chapterList);
-    $cmd = "ffmpeg -y -f concat -safe 0 -i $chapterList -copy_unknown -map_metadata 0 \\
-        -c copy \\
+    $cmd = "ffmpeg -y -f concat -safe 0 -i $chapterList -c copy -copy_unknown \\
         -map 0:v -map 0:a\? \\
         -map 0:m:handler_name:' GoPro TCD'\? \\
-        -map 0:d\? \\
+        -map 0:m:handler_name:' GoPro MET'\? \\
         -map 0:m:handler_name:' GoPro SOS'\? \\
-        -tag:d:1 'gpmd' -tag:d:2 'gpmd' \\
-        -metadata:s:v: handler='        GoPro AVC' \\
-        -metadata:s:a: handler='        GoPro AAC' \\
-        -metadata:s:d:0 handler='       GoPro TCD' \\
-        -metadata:s:d:1 handler='       GoPro MET' \\
-        -metadata:s:d:2 handler='       GoPro SOS (original fdsc stream)' \\
+        -tag:d:0 tmcd -tag:d:1 gpmd -tag:d:2 gpmd \\
+        -metadata:s:v:0 handler_name='GoPro H.265' \\
+        -metadata:s:a:0 handler_name='GoPro AAC  ' \\
+        -metadata:s:d:0 handler_name='GoPro TCD  ' \\
+        -metadata:s:d:1 handler_name='GoPro MET  ' \\
+        -metadata:s:d:2 handler_name='GoPro SOS  ' \\
+        -map_metadata 0 -movflags use_metadata_tags \\
         $outputFile";
     // check if the output file exists
     if (file_exists($outputFileCheck)) {
