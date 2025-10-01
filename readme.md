@@ -1,10 +1,32 @@
 # Gopro episode merge with metadata
 
 ## Usage
+
+### Merge Episodes
 ```shell
 php find.php /path/to/gopro/episodes /path/to/output/dir /path/to/store/episode-lists
 ```
 All arguments are optional
+
+### Repair Corrupted Files
+```shell
+php repair.php /path/to/gopro/files [/path/to/output/dir] [specific_file.MP4]
+```
+- First argument: Directory containing GoPro files (default: current directory)
+- Second argument: Output directory for repaired files (default: input directory + /repaired)
+- Third argument: Optional specific file to repair (if not provided, all files are processed)
+
+Examples:
+```shell
+# Repair all files in a directory
+php repair.php /path/to/gopro/files
+
+# Repair all files and save to specific output directory
+php repair.php /path/to/gopro/files /path/to/repaired/output
+
+# Repair a specific file
+php repair.php /path/to/gopro/files /path/to/output GX010147.MP4
+```
 
 ## Processing
 
