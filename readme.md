@@ -20,8 +20,15 @@ Output file timestamps are touched to the timestamp of the first chapter file of
 
 ## Metadata
 
-The track order of the metadata is preserved.
-The SOS metadata is not preserved.
+The script preserves GoPro metadata to ensure merged videos work seamlessly in GoPro Quik app:
+
+- **Stream order**: TCD (timecode) stream is mapped before MET (metadata) streams to match original file structure
+- **Handler names**: Exact handler names with proper spacing are preserved (e.g., "GoPro TCD  ", "GoPro MET  ")
+- **Creation time**: All stream-level creation_time metadata is preserved via `-movflags use_metadata_tags`
+- **Timecode**: Timecode metadata is preserved across all relevant streams
+- **Firmware/Encoder**: Container-level metadata including firmware and encoder information is preserved
+- **Track order**: The track order of the metadata is preserved as in original files
+- **Metadata backup**: Metadata is extracted and backed up to the bin folder for each chapter
 
 This blog post was helpful: [how-to-compress-gopro-movies-and-keep-metadata](https://coderunner.io/how-to-compress-gopro-movies-and-keep-metadata/)
 
